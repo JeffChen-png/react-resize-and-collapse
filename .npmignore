@@ -1,0 +1,38 @@
+# Исходники
+src/
+tests/
+example/
+
+# Конфигурационные файлы
+.github/
+.vscode/
+.idea/
+.eslintrc.js
+.eslintignore
+.prettierrc
+.prettierignore
+.editorconfig
+tsconfig.json
+rollup.config.js
+jest.config.js
+jest.setup.js
+
+# Тестирование
+coverage/
+__tests__/
+__mocks__/
+*.test.*
+*.spec.*
+
+# Разработка
+.git/
+.gitignore
+.npmignore
+CONTRIBUTING.md
+.travis.yml
+
+# Прочее
+*.log
+.DS_Store
+node_modules/
+tmp/
