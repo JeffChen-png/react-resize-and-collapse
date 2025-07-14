@@ -15,6 +15,7 @@ export interface ResizableContainerProps {
   minHeight: number;
   resizerHeight: number;
   initialHeights?: number[];
+  defaultHeight?: number;
   containerClassname?: string;
   children: Array<(props: { classname: string; height: number }) => React.ReactElement>;
   resizer: (props: { onPointerDown: React.MouseEventHandler<HTMLElement> }) => React.ReactElement;
@@ -34,6 +35,7 @@ export function ResizableContainer({
   resizerHeight,
   initialHeights,
   containerClassname,
+  defaultHeight = minHeight,
   resizer,
 }: ResizableContainerProps) {
   const [heights, setHeights] = useState(
@@ -53,7 +55,8 @@ export function ResizableContainer({
         const prev = prevHeights[index];
 
         // Expand
-        const restored = Math.max(lastExpandedHeights.current[index] || minHeight, minHeight);
+        const lastExpandedHeight = Math.max(lastExpandedHeights.current[index], minHeight);
+        const restored = lastExpandedHeight <= minHeight ? defaultHeight : lastExpandedHeight;
         const delta = restored - prev;
 
         return redistributeHeights({
@@ -67,7 +70,7 @@ export function ResizableContainer({
         });
       });
     },
-    [minHeight, resizerHeight]
+    [defaultHeight, minHeight, resizerHeight]
   );
 
   const collapse = useCallback(
